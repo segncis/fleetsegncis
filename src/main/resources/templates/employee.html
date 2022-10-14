@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Tables / General - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.3.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+	<!-- ======= Header ======= -->
+ <div th:replace="fragments/topnav :: topnav"></div>
+  <!-- ======= Sidebar ======= -->
+  <div th:replace="fragments/asside :: asside"></div>
+  <!-- End Sidebar-->
+  
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Liste Des Pays</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{'/index'}">Home</a></li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">General</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+      
+			 <div class="card">
+			 	     <!-- Large Modal -->
+              
+            <div class="card-body">
+            
+            	<button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#addModal">
+                New Country
+              </button>
+
+             
+              <h5 class="card-title">Table des différent pays</h5>
+
+              <!-- Table with hoverable rows -->
+              <table class="table table-hover">
+                <thead >
+                  <tr >
+                    <th scope="col">id</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Full Name</th>
+                    
+                    <th scope="col">Phone</th>
+                    <th scope="col">email</th>
+                
+                    <th  scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="employee:${employees}">
+                    <th scope="row" th:text="${employee.id}"></th>
+                    <td >
+					 <a id="photoButton" th:href="@{'assets/img/photo/' + ${employee.photo}}">
+					 <img th:src="@{'assets/img/photo/' + ${employee.photo}}" width="40" height="40">
+					 </a>
+                    </td>
+                    <td><a th:text="${employee.username} ?: 'Check'" th:href="@{/employees/assignUsernameMatricule/(id=${employee.id})}"></a></td>
+                    <td th:text="${employee.firstname} +' '+${employee.lastname}"></td>
+					<td th:text="${employee.phone}"></td>
+                	<td th:text="${employee.email}"></td>
+                    <td >
+       				<a id="editButtonEmp"  class="btn btn-link" th:href="@{/employees/findById/(id=${employee.id})}" role="button"><i class="fas fa-edit"></i></a>
+       				
+       				
+       				<a id="deleteButton"  th:href="@{/employees/delete/(id=${employee.id})}"  class="btn btn-link"  role="button"><i class="far fa-trash-alt"></i></a>
+       				
+       				</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table with hoverable rows -->
+
+            </div>
+          </div>
+
+       
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+	
+	 
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  
+
+  <!-- Template Main JS File -->
+  
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/jquery.js"></script>
+  <script type="text/javascript" src="assets/js/employee.js"></script>
+
+ <div class="modal fade" id="addModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">New Employee</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    
+                  <form th:action="@{/employees/addNew}" method="post">
+                  <div class="row">
+                     <div class="col-sm-6">
+						  	 <label for="firstname" >Prenom</label>
+						   <input type="text"   name="firstname" class="form-control mt-2 mb-2" id="firstname" aria-describedby="textHelp">
+						    
+						  </div>
+						  <div class="col-sm-6">
+						    <label for="lastname">Nom</label>
+						   <input type="text"  name="lastname" class="form-control mt-2 mb-2 " id="lastname" aria-describedby="nameHelp">
+						    
+						 </div>
+					 </div>
+					<div class="row">
+                     <div class="col-sm-6">
+						 
+						   <label>Email</label>
+						   <input type="email" name="email" required class="form-control mt-2 mb-2 " id="email" aria-describedby="nameHelp">
+						    
+						 </div>
+						 <div class="col-sm-6">
+						  	 <label >Titre</label>
+						   <select class="form-control mt-2 mb-2" id="ddlTitleAdd" name="title" required>
+		        	       <option>-SELECT-</option>			    					  					    					    
+				          <option value="MALE">Mr.</option>
+ 						  <option value="FEMAL">Ms.</option>
+ 					   	 </select>		
+						  </div>
+						   </div>
+						   
+					<div class="row">
+                     <div class="col-sm-6">
+						 
+						  	 <label >Adresse</label>
+						   <input type="text"   name="address" class="form-control mt-2 mb-2" id="address" aria-describedby="textHelp">
+						    
+						  </div>
+						  <div class="col-sm-6">
+						 
+						  	 <label >Phone</label>
+						   <input type="number"   name="phone" class="form-control mt-2 mb-2" id="phone" aria-describedby="textHelp">
+						    
+						  </div>
+						</div>
+						 <label for="flpImageAdd" class="col-sm-4 col-form-label">Select Image: </label>
+				   			 <div class="col-sm-6">
+				     	 <input type="file" class="form-control-file" id="fupImageAdd" name="photo" placeholder="Select File">
+				   			 </div>
+						<div class="mt-2">
+						
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<a class="btn btn-primary" id="cancelModal" role="button">Cancel</a>
+						</div>
+					</div>
+				</form>	
+                    </div>
+                  
+                  </div>
+                </div>
+              </div><!-- End Large Modal-->
+              
+              <!--begin Large Modal for edit-->
+   <div class="modal fade" id="editModalEmp" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Update Employeey</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    
+                  <form th:action="@{/employees/update}" method="put">
+                  <div class="row">
+                     <div class="col-sm-6">
+						  	 <label for="firstname" >Prenom</label>
+						   <input type="text"   name="firstname" class="form-control mt-2 mb-2" id="Editfirstname" aria-describedby="textHelp">
+						    
+						  </div>
+						  <div class="col-sm-6">
+						    <label for="lastname">Nom</label>
+						   <input type="text"  name="lastname" class="form-control mt-2 mb-2 " id="Editlastname" aria-describedby="nameHelp">
+						    
+						 </div>
+					 </div>
+					<div class="row">
+                     <div class="col-sm-6">
+						 
+						   <label>Email</label>
+						   <input type="email" name="email" required class="form-control mt-2 mb-2 " id="Editemail" aria-describedby="nameHelp">
+						    
+						 </div>
+						 <div class="col-sm-6">
+						  	 <label >Titre</label>
+						   <select class="form-control mt-2 mb-2" id="Edittitle" name="title">
+		        	       <option>-SELECT-</option>			    					  					    					    
+				          <option value="MALE">Mr.</option>
+ 						  <option value="FEMAL">Ms.</option>
+ 					   	 </select>		
+						  </div>
+						   </div>
+						   
+					<div class="row">
+                     <div class="col-sm-6">
+						 
+						  	 <label >Adresse</label>
+						   <input type="text"   name="address" class="form-control mt-2 mb-2" id="Editaddress" aria-describedby="textHelp">
+						    
+						  </div>
+						  <div class="col-sm-6">
+						 
+						  	 <label >Phone</label>
+						   <input type="number"   name="phone" class="form-control mt-2 mb-2" id="Editphone" aria-describedby="textHelp">
+						    
+						  </div>
+						</div>
+						<input type="hidden" id="txtUsernameEdit" name="username">
+						<div class="mt-2">
+					
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<a class="btn btn-primary" role="button" data-dismiss="modal">Cancel</a>
+						</div>
+					</div>
+				</form>	
+                    </div>
+                  
+                  </div>
+                </div>
+              </div><!-- End Large Modal for edit-->
+              
+                          
+  
+
+ <div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Are you sure you want to delete the selected record?
+    </div>
+      <div class="modal-footer">
+        <a href="" class="btn btn-primary" id="delRef">Yes, Delete</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>   
+
+ <div class="modal fade" tabindex="-1" role="dialog" id="photoModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      		<img id="employeePhoto" src="" width="90%" height="90%">
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>   
+
+ 
+  
+ 
+</body>
+
+</html>
